@@ -1,10 +1,12 @@
 import * as React from 'react';
-
+import { Link } from 'react-router-dom';
 
 const Info = () => (
     <div className="app-info">
         <h2>Welcome to TreBus!</h2>
-        <i className="fa fa-close app-info-close"></i>
+        <Link to={'/'}>
+            <i className="fa fa-close app-info-close"></i>
+        </Link>
 
         <div className="info-container">
             <p>TreBus is an app to help you navigate your bus schedules in the city of Tampere.</p>
