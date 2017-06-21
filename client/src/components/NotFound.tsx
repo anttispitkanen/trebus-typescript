@@ -5,6 +5,6 @@ const NotFound = () => (
         <h2>404 - not found</h2>
         <h3>¯\_(ツ)_/¯</h3>
     </div>
-)
+);
 
 export default NotFound;

@@ -1,31 +1,20 @@
 import * as React from 'react';
+
 import './App.css';
 
-import NotFound from './components/NotFound';
+import Routes from './Routes';
+// import NotFound from './components/NotFound';
+
+
+// this is the element that wraps with redux
 
 class App extends React.Component<{}, null> {
-
-    componentDidMount() {
-
-        fetch('test')
-        .then(res => {
-            if (res.ok) { return res.json() } 
-            else { throw new Error('res ei ok :/') }
-        })
-        .then(data => {
-            console.log(data);
-        })
-        .catch(err => {
-            console.error(err);
-        })
-
-    }
 
     render() {
         return (
             <div className="App">
                 {/*<Headline />*/}
-                <NotFound />
+                <Routes />
             </div>
         );
     }

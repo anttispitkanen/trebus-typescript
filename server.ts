@@ -46,5 +46,4 @@ app.post('/route', async (req, res): Promise<any> => {
     } catch (e) {
         console.error(e);
     }
-    
 })
