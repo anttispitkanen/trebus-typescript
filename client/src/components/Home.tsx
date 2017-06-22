@@ -15,25 +15,18 @@ const Home = () => (
         <Hotspots />
         <Footer />
     </div>
-)
+);
 
 export default Home;
-
 
 const MyLocation = () => (
     <div>
         <h2>MyLocation</h2>
     </div>
-)
+);
 
 const Hotspots = () => (
     <div>
         <h2>Hotspots</h2>
     </div>
-)
-
-/*const Footer = () => (
-    <div>
-        <h2>Footer</h2>
-    </div>
-)*/
+);

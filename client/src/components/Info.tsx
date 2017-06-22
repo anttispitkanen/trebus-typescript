@@ -5,7 +5,7 @@ const Info = () => (
     <div className="app-info">
         <h2>Welcome to TreBus!</h2>
         <Link to={'/'}>
-            <i className="fa fa-close app-info-close"></i>
+            <i className="fa fa-close app-info-close" />
         </Link>
 
         <div className="info-container">
@@ -16,13 +16,19 @@ const Info = () => (
                 those hotspots from your current location.
             </p>
             <p>
-                If you want you can check out the source code on <a href="https://github.com/anttispitkanen/trebus" target="_blank">GitHub</a>.
+                If you want you can check out the source code on&nbsp; 
+                <a 
+                    href="https://github.com/anttispitkanen/trebus" 
+                    target="_blank"
+                >
+                    GitHub
+                </a>.
             </p>
             <p>-Antti Pitkänen</p>
             <p>(This app is a personal project of mine and not intended for mass use.)</p>
         </div>
 
     </div>
-)
+);
 
 export default Info;
