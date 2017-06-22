@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import Header from './Header';
 import Footer from './Footer';
+import MyLocationContainer from '../containers/MyLocationContainer';
 
 // renders:
 // <Header />
@@ -11,7 +12,7 @@ import Footer from './Footer';
 const Home = () => (
     <div>
         <Header />
-        <MyLocation />
+        <MyLocationContainer />
         <Hotspots />
         <Footer />
     </div>
@@ -19,11 +20,11 @@ const Home = () => (
 
 export default Home;
 
-const MyLocation = () => (
+/*const MyLocation = () => (
     <div>
         <h2>MyLocation</h2>
     </div>
-);
+);*/
 
 const Hotspots = () => (
     <div>
