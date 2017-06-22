@@ -117,9 +117,28 @@ describe('allHotspots', () => {
     })
 })
 
-// describe('myLocation', () => {
-//     it('updates location', () => {
-//         expect(myLocation(undefined, null))
-//         .toEqual()
-//     })
-// })
+const testLocation: MyLocation = {
+    latitude: 'test lat',
+    longitude: 'test long',
+    coords: 'test long,lat',
+    address: 'test address'
+} 
+
+const testLocation2: MyLocation = {
+    latitude: 'test lat 2',
+    longitude: 'test long 2',
+    coords: 'test long,lat 2',
+    address: 'test address 2'
+} 
+
+describe('myLocation', () => {
+    it('updates location with empty initial state', () => {
+        expect(myLocation(undefined, updateMyLocation(testLocation)))
+        .toEqual(testLocation);
+    })
+
+    it('updates location when there is an old location already', () => {
+        expect(myLocation(testLocation, updateMyLocation(testLocation2)))
+        .toEqual(testLocation2);
+    })
+})
