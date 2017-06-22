@@ -3,3 +3,6 @@ export type ADD_HOTSPOT = typeof ADD_HOTSPOT;
 
 export const DELETE_HOTSPOT = 'DELETE_HOTSPOT';
 export type DELETE_HOTSPOT = typeof DELETE_HOTSPOT;
+
+export const UPDATE_MY_LOCATION = 'UPDATE_MY_LOCATION';
+export type UPDATE_MY_LOCATION = typeof UPDATE_MY_LOCATION;
