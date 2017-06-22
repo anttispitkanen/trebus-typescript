@@ -1,13 +1,11 @@
-import { ADD_HOTSPOT, DELETE_HOTSPOT, UPDATE_MY_LOCATION } from '../constants';
+import { 
+    ADD_HOTSPOT, 
+    DELETE_HOTSPOT, 
+    MOVE_HOTSPOT_UP,
+    MOVE_HOTSPOT_DOWN,
+    UPDATE_MY_LOCATION } from '../constants';
 import { Hotspot, MyLocation } from '../types';
 import * as actions from './index';
-
-// const addHotspotActionExpectation = {
-//     type: ADD_HOTSPOT,
-//     newHotspot: {
-//         test: 'hello world'
-//     }
-// }
 
 const testHotspot: Hotspot = {
     name: 'testinimi',
@@ -27,8 +25,27 @@ describe('hotspot actions', () => {
     }),
 
     it('should delete', () => {
-        expect(actions.deleteHotspot())
-        .toEqual({ type: DELETE_HOTSPOT });
+        expect(actions.deleteHotspot(42))
+        .toEqual({ 
+            type: DELETE_HOTSPOT,
+            indexToDelete: 42
+        });
+    })
+
+    it('should create action to move up', () => {
+        expect(actions.moveHotspotUp(42))
+        .toEqual({
+            type: MOVE_HOTSPOT_UP,
+            indexToMove: 42
+        })
+    })
+
+    it('should create an action to move down', () => {
+        expect(actions.moveHotspotDown(42))
+        .toEqual({
+            type: MOVE_HOTSPOT_DOWN,
+            indexToMove: 42
+        })
     })
 })
 

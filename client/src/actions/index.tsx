@@ -14,7 +14,20 @@ export interface DeleteHotspot {
     indexToDelete: number;
 }
 
-export type HotspotAction = AddHotspot | DeleteHotspot;
+export interface MoveHotspotUp {
+    type: constants.MOVE_HOTSPOT_UP;
+    indexToMove: number;
+}
+
+export interface MoveHotspotDown {
+    type: constants.MOVE_HOTSPOT_DOWN;
+    indexToMove: number;
+}
+
+export type HotspotAction = AddHotspot 
+                            | DeleteHotspot 
+                            | MoveHotspotUp
+                            | MoveHotspotDown;
 
 export const addHotspot = (newHotspot: Hotspot): AddHotspot => ({
     type: constants.ADD_HOTSPOT,
@@ -25,6 +38,17 @@ export const addHotspot = (newHotspot: Hotspot): AddHotspot => ({
 export const deleteHotspot = (indexToDelete: number): DeleteHotspot => ({
     type: constants.DELETE_HOTSPOT,
     indexToDelete: indexToDelete
+})
+
+// MOVE HOTSPOT UP/DOWN
+export const moveHotspotUp = (indexToMove: number): MoveHotspotUp => ({
+    type: constants.MOVE_HOTSPOT_UP,
+    indexToMove: indexToMove
+})
+
+export const moveHotspotDown = (indexToMove: number): MoveHotspotDown => ({
+    type: constants.MOVE_HOTSPOT_DOWN,
+    indexToMove: indexToMove
 })
 
 /**

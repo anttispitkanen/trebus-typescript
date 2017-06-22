@@ -115,16 +115,6 @@ describe('allHotspots', () => {
             ])
         })
     })
-    
-
-    // it('deletes correctly', () => {
-    //     expect(allHotspots(undefined, deleteTest)).toEqual('deleted');
-    // })
-
-    // it('returns empty array when no arguments are given', () => {
-    //     expect(allHotspots(undefined, {}))
-    //     .toEqual([]);
-    // })
 })
 
 // describe('myLocation', () => {
