@@ -47,4 +47,25 @@ app.post('/route', (req, res) => __awaiter(this, void 0, void 0, function* () {
         console.error(e);
     }
 }));
+app.post('/get-address', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    console.log('/get-address registered');
+    console.log(req.body);
+    try {
+        const latitude = req.body.latitude;
+        const longitude = req.body.longitude;
+        const coords = longitude + ',' + latitude;
+        const url = `http://api.publictransport.tampere.fi/prod/?`
+            + process.env.API_KEY + '&'
+            + process.env.API_PASS + '&'
+            + `request=reverse_geocode&`
+            + `coordinate=${coords}&`
+            + `limit=1&epsg_in=wgs84&format=json`;
+        const response = yield axios.get(url);
+        console.log(response.data);
+        res.send(response.data);
+    }
+    catch (e) {
+        console.error(e);
+    }
+}));
 //# sourceMappingURL=server.js.map

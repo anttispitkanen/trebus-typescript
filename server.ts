@@ -47,3 +47,30 @@ app.post('/route', async (req, res): Promise<any> => {
         console.error(e);
     }
 })
+
+app.post('/get-address', async (req, res) => {
+    console.log('/get-address registered');
+    console.log(req.body);
+    
+    try {
+        const latitude: string = req.body.latitude;
+        const longitude: string = req.body.longitude;
+        const coords: string = longitude + ',' + latitude;
+
+        const url: string = `http://api.publictransport.tampere.fi/prod/?`
+                            + process.env.API_KEY + '&'
+                            + process.env.API_PASS + '&'
+                            + `request=reverse_geocode&`
+                            + `coordinate=${coords}&`
+                            + `limit=1&epsg_in=wgs84&format=json`;
+        
+        const response = await axios.get(url);
+        console.log(response.data);
+        res.send(response.data);
+    
+    } catch (e) {
+        console.error(e);
+    }
+    
+        
+})

@@ -29,12 +29,15 @@ export const MyLocationContainer = ({ myLocation, updateMyLocation }: Props) => 
                 alert('cannot locate');
             }
 
+            console.log(pos);
+
             newLocation.latitude = pos.coords.latitude.toString();
             newLocation.longitude = pos.coords.longitude.toString();
             newLocation.address = 'Kotikolo :D';
 
             updateMyLocation(newLocation);
 
+            tryFetch(newLocation.latitude, newLocation.longitude);
 
         }, failure => {
             console.error(failure.message);
@@ -43,13 +46,37 @@ export const MyLocationContainer = ({ myLocation, updateMyLocation }: Props) => 
         
     };
 
+    const tryFetch = async (latitude: string, longitude: string) => {
+        console.log('in tryFetch');
+        
+        fetch('/get-address', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                latitude,
+                longitude
+            })
+        })
+        .then(res => { 
+            if (res.ok) return res.json();
+            else throw new Error('res not ok :/');
+        })
+        .then(data => { console.log(data) })
+        .catch(err => { console.error(err) })
+    }
+
     return (
         <div className="my-location">
 
             <button 
                 className="button"
                 title="locate me"
-                onClick={() => locateMe() }
+                onClick={() => {
+                    console.log('click');
+                    locateMe();
+                }}
             >
                 Locate me
             </button>
