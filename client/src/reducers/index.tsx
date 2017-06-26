@@ -35,6 +35,8 @@ const initialLocation: MyLocation = {
 export const myLocation = (state: MyLocation = initialLocation, action: MyLocationAction): MyLocation => {
     switch (action.type) {
         case UPDATE_MY_LOCATION:
+            // console.log('new state:');
+            // console.log(action.newLocation);
             return action.newLocation;
 
         default:

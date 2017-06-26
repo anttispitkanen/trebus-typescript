@@ -20,12 +20,6 @@ const Home = () => (
 
 export default Home;
 
-/*const MyLocation = () => (
-    <div>
-        <h2>MyLocation</h2>
-    </div>
-);*/
-
 const Hotspots = () => (
     <div>
         <h2>Hotspots</h2>
