@@ -53,9 +53,7 @@ app.post('/get-address', async (req, res) => {
     console.log(req.body);
     
     try {
-        const latitude: string = req.body.latitude;
-        const longitude: string = req.body.longitude;
-        const coords: string = longitude + ',' + latitude;
+        const coords: string = req.body.coords;
 
         const url: string = `http://api.publictransport.tampere.fi/prod/?`
                             + process.env.API_KEY + '&'

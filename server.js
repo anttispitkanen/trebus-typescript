@@ -51,9 +51,7 @@ app.post('/get-address', (req, res) => __awaiter(this, void 0, void 0, function*
     console.log('/get-address registered');
     console.log(req.body);
     try {
-        const latitude = req.body.latitude;
-        const longitude = req.body.longitude;
-        const coords = longitude + ',' + latitude;
+        const coords = req.body.coords;
         const url = `http://api.publictransport.tampere.fi/prod/?`
             + process.env.API_KEY + '&'
             + process.env.API_PASS + '&'
