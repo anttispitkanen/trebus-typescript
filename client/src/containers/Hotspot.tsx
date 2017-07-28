@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
 import {
-    // deleteHotspot,
-    // moveHotspotUp,
-    // moveHotspotDown
+    deleteHotspot,
+    moveHotspotUp,
+    moveHotspotDown
 } from '../actions';
 
 import Hotspot from '../components/Hotspot';
@@ -14,16 +14,13 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
     deleteHotspot: (index: number) => {
-        // dispatch(deleteHotspot(index));
-        console.log('delete ' + index);
+        dispatch(deleteHotspot(index));
     },
     moveHotspotUp: (index: number) => {
-        // dispatch(moveHotspotUp(index));
-        console.log('moveUp ' + index);
+        dispatch(moveHotspotUp(index));
     },
     moveHotspotDown: (index: number) => {
-        // dispatch(moveHotspotDown(index));
-        console.log('moveDown ' + index);
+        dispatch(moveHotspotDown(index));
     }
 })
 

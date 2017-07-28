@@ -1,7 +1,7 @@
 /**
  * Hotspot
  */
-export interface Hotspot {
+export interface HotspotType {
     name: string | undefined;
     address: string | undefined;
     latitude: string | undefined;

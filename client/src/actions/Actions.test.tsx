@@ -1,13 +1,13 @@
-import { 
-    ADD_HOTSPOT, 
-    DELETE_HOTSPOT, 
+import {
+    ADD_HOTSPOT,
+    DELETE_HOTSPOT,
     MOVE_HOTSPOT_UP,
     MOVE_HOTSPOT_DOWN,
     UPDATE_MY_LOCATION } from '../constants';
-import { Hotspot, MyLocation } from '../types';
+import { HotspotType, MyLocation } from '../types';
 import * as actions from './index';
 
-const testHotspot: Hotspot = {
+const testHotspot: HotspotType = {
     name: 'testinimi',
     address: 'testiosoite',
     latitude: 'lat',
@@ -26,7 +26,7 @@ describe('hotspot actions', () => {
 
     it('should delete', () => {
         expect(actions.deleteHotspot(42))
-        .toEqual({ 
+        .toEqual({
             type: DELETE_HOTSPOT,
             indexToDelete: 42
         });

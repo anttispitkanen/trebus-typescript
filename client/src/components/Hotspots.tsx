@@ -3,27 +3,33 @@ import * as React from 'react';
 import Hotspot from '../containers/Hotspot';
 import AddHotspot from '../containers/AddHotspot';
 
-const hotspotArray = [1, null, undefined, Infinity, NaN];
+import { HotspotType } from '../types';
+
+// const hotspotArray = [1, null, undefined, Infinity, NaN];
 
 interface Props {
-    myLocation: any // FIX TYPE
+    myLocation: any; // FIX TYPE
+    allHotspots: HotspotType[];
 }
 
-const Hotspots = ({ myLocation }: Props) => (
+// FIXME: try to find another way to pass state.
+// Now a change in hotspots or location triggers a re-render for all hotspots.
+const Hotspots = ({ myLocation, allHotspots = [] }: Props) => (
     <div className="hotspots">
 
-        {hotspotArray.map((hotspot, i) => {
+        {allHotspots.map((hotspot, i) => {
             return (
                 <Hotspot
+                    {...hotspot}
                     key={i}
                     index={i}
                 />
             )
         })}
 
-        {hotspotArray.length < 8  && <AddHotspot />}
+        {allHotspots.length < 8  && <AddHotspot />}
     </div>
-)
+);
 
 export default Hotspots;
 

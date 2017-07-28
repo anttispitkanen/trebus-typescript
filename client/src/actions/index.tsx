@@ -1,15 +1,15 @@
 import * as constants from '../constants';
-import { Hotspot, MyLocation } from '../types';
+import { HotspotType, MyLocation } from '../types';
 
 /**
  * Adding hotspots
  */
 export interface AddHotspot {
     type: constants.ADD_HOTSPOT;
-    newHotspot: Hotspot;
+    newHotspot: HotspotType;
 }
 
-export const addHotspot = (newHotspot: Hotspot): AddHotspot => ({
+export const addHotspot = (newHotspot: HotspotType): AddHotspot => ({
     type: constants.ADD_HOTSPOT,
     newHotspot
 });
