@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { 
+import {
     Route,
     Switch
 } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
-import { 
+import {
     ConnectedRouter,
     routerMiddleware,
-    // push
-} from 'react-router-redux';
+} from 'react-router-redux'; // FIXME remove these
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import AppReducer from './reducers';
 
@@ -24,8 +24,10 @@ const middleware = routerMiddleware(history);
 
 const store = createStore(
     AppReducer,
-    applyMiddleware(middleware)
-)
+    composeWithDevTools(
+        applyMiddleware(middleware)
+    )
+);
 
 
 const Routes = () => (
