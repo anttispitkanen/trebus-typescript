@@ -16,6 +16,7 @@ const Hotspots = ({ myLocation }: Props) => (
             return (
                 <Hotspot
                     key={i}
+                    index={i}
                 />
             )
         })}

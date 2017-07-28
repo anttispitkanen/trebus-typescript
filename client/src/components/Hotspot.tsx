@@ -1,18 +1,19 @@
 import * as React from 'react';
 
 interface Props {
-    deleteHotspot: () => any;
-    moveHotspotUp: () => any;
-    moveHotspotDown: () => any;
+    deleteHotspot: (i: number) => any;
+    moveHotspotUp: (i: number) => any;
+    moveHotspotDown: (i: number) => any;
+    index: number;
 }
 
-const Hotspot = ({ deleteHotspot, moveHotspotUp, moveHotspotDown}: Props) => (
+const Hotspot = ({ deleteHotspot, moveHotspotUp, moveHotspotDown, index }: Props) => (
     <div className="single-hotspot">
         <h3>Nimi tähän</h3>
 
-        <i className="arrow-up fa fa-chevron-up" onClick={() => console.log('up')}></i>
-        <i className="fa fa-times delete-hotspot" onClick={() => console.log('delete')}></i>
-        
+        <i className="arrow-up fa fa-chevron-up" onClick={() => moveHotspotUp(index)}></i>
+        <i className="fa fa-times delete-hotspot" onClick={() => deleteHotspot(index)}></i>
+
         <ul>
             <li>
                 <span>1</span> hours <span>12</span> mins
@@ -23,8 +24,8 @@ const Hotspot = ({ deleteHotspot, moveHotspotUp, moveHotspotDown}: Props) => (
             <li>Arrival time: </li>
             <li>Distance: </li>
         </ul>
-        
-        <i className="arrow-down fa fa-chevron-down" onClick={() => console.log('down')}></i>
+
+        <i className="arrow-down fa fa-chevron-down" onClick={() => moveHotspotDown(index)}></i>
     </div>
 )
 
