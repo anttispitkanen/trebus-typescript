@@ -5,7 +5,7 @@ interface Props {
     moveHotspotUp: (i: number) => any;
     moveHotspotDown: (i: number) => any;
     index: number;
-    name: String;
+    name: string;
 }
 
 const Hotspot = ({
@@ -19,7 +19,7 @@ const Hotspot = ({
         <h3>{name}</h3>
 
         <i className="arrow-up fa fa-chevron-up" onClick={() => moveHotspotUp(index)}></i>
-        <i className="fa fa-times delete-hotspot" onClick={() => deleteHotspot(index)}></i>
+        <i className="fa fa-times delete-hotspot" onClick={() => confirmDeletion(index, name, deleteHotspot)}></i>
 
         <ul>
             <li>
@@ -34,7 +34,15 @@ const Hotspot = ({
 
         <i className="arrow-down fa fa-chevron-down" onClick={() => moveHotspotDown(index)}></i>
     </div>
-)
+);
+
+
+const confirmDeletion = (index: number, name: string, deleteHotspot: any): any => {
+    if (confirm(`You really want to delete ${name}?`)) {
+        deleteHotspot(index);
+    }
+};
+
 
 export default Hotspot;
 
