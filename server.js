@@ -12,6 +12,7 @@ require("dotenv/config");
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const { URL, URLSearchParams } = require('url');
 const app = express();
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
@@ -30,6 +31,9 @@ app.get('/test', (req, res) => {
         "vastaus": "jeejee"
     });
 });
+// FIXME:
+// add url and URLSearchParams
+const apiURL = new URL('http://api.publictransport.tampere.fi/prod/');
 app.post('/route', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const startCoords = req.body.startCoords;
     const destCoords = req.body.coords;
@@ -48,22 +52,26 @@ app.post('/route', (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
 }));
 app.post('/get-address', (req, res) => __awaiter(this, void 0, void 0, function* () {
-    console.log('/get-address registered');
-    console.log(req.body);
     try {
         const coords = req.body.coords;
+        const params = new URLSearchParams({
+            request: 'reverse_geocode',
+            coordinate: coords,
+            limit: 1,
+            epsg_in: 'wgs84',
+            format: 'json'
+        });
         const url = `http://api.publictransport.tampere.fi/prod/?`
             + process.env.API_KEY + '&'
             + process.env.API_PASS + '&'
-            + `request=reverse_geocode&`
-            + `coordinate=${coords}&`
-            + `limit=1&epsg_in=wgs84&format=json`;
+            + params.toString();
         const response = yield axios.get(url);
-        console.log(response.data);
         res.send(response.data);
     }
     catch (e) {
         console.error(e);
+        res.send({ error: 'Could not find address' });
+        // FIXME: handle sending errors to client differently?
     }
 }));
 //# sourceMappingURL=server.js.map

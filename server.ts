@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 
+const { URL, URLSearchParams } = require('url');
+
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -29,6 +31,11 @@ app.get('/test', (req, res) => {
 });
 
 
+// FIXME:
+// add url and URLSearchParams
+
+const apiURL = new URL('http://api.publictransport.tampere.fi/prod/');
+
 app.post('/route', async (req, res): Promise<any> => {
     const startCoords: string = req.body.startCoords;
     const destCoords: string = req.body.coords;
@@ -49,23 +56,28 @@ app.post('/route', async (req, res): Promise<any> => {
 });
 
 app.post('/get-address', async (req, res) => {
-    // console.log('/get-address registered');
-    // console.log(req.body);
     try {
         const coords: string = req.body.coords;
+
+        const params = new URLSearchParams({
+            request: 'reverse_geocode',
+            coordinate: coords,
+            limit: 1,
+            epsg_in: 'wgs84',
+            format: 'json'
+        });
 
         const url: string = `http://api.publictransport.tampere.fi/prod/?`
                             + process.env.API_KEY + '&'
                             + process.env.API_PASS + '&'
-                            + `request=reverse_geocode&`
-                            + `coordinate=${coords}&`
-                            + `limit=1&epsg_in=wgs84&format=json`;
+                            + params.toString();
 
         const response = await axios.get(url);
-        // console.log(response.data);
         res.send(response.data);
 
     } catch (e) {
         console.error(e);
+        res.send({ error: 'Could not find address' });
+        // FIXME: handle sending errors to client differently?
     }
 });
