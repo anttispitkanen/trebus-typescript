@@ -5,11 +5,18 @@ interface Props {
     moveHotspotUp: (i: number) => any;
     moveHotspotDown: (i: number) => any;
     index: number;
+    name: String;
 }
 
-const Hotspot = ({ deleteHotspot, moveHotspotUp, moveHotspotDown, index }: Props) => (
+const Hotspot = ({
+    deleteHotspot,
+    moveHotspotUp,
+    moveHotspotDown,
+    index,
+    name
+}: Props) => (
     <div className="single-hotspot">
-        <h3>Nimi tähän</h3>
+        <h3>{name}</h3>
 
         <i className="arrow-up fa fa-chevron-up" onClick={() => moveHotspotUp(index)}></i>
         <i className="fa fa-times delete-hotspot" onClick={() => deleteHotspot(index)}></i>
