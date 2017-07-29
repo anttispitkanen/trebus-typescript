@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.listen(app.get('port'), () => {
     console.log('listening on ' + app.get('port'));
-})
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -25,8 +25,8 @@ app.get('/test', (req, res) => {
     console.log('gotted :D')
     res.send({
         "vastaus": "jeejee"
-    })
-})
+    });
+});
 
 
 app.post('/route', async (req, res): Promise<any> => {
@@ -46,12 +46,11 @@ app.post('/route', async (req, res): Promise<any> => {
     } catch (e) {
         console.error(e);
     }
-})
+});
 
 app.post('/get-address', async (req, res) => {
-    console.log('/get-address registered');
-    console.log(req.body);
-    
+    // console.log('/get-address registered');
+    // console.log(req.body);
     try {
         const coords: string = req.body.coords;
 
@@ -61,14 +60,12 @@ app.post('/get-address', async (req, res) => {
                             + `request=reverse_geocode&`
                             + `coordinate=${coords}&`
                             + `limit=1&epsg_in=wgs84&format=json`;
-        
+
         const response = await axios.get(url);
-        console.log(response.data);
+        // console.log(response.data);
         res.send(response.data);
-    
+
     } catch (e) {
         console.error(e);
     }
-    
-        
-})
+});
