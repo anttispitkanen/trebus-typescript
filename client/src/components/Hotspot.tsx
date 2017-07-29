@@ -18,7 +18,9 @@ const Hotspot = ({
     <div className="single-hotspot">
         <h3>{name}</h3>
 
-        <i className="arrow-up fa fa-chevron-up" onClick={() => moveHotspotUp(index)}></i>
+        <i className="arrow-up fa fa-chevron-up" onClick={() => {
+            index > 0 && moveHotspotUp(index);
+        }}></i>
         <i className="fa fa-times delete-hotspot" onClick={() => confirmDeletion(index, name, deleteHotspot)}></i>
 
         <ul>
