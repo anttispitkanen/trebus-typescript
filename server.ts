@@ -31,15 +31,13 @@ app.get('/test', (req, res) => {
 });
 
 
-// FIXME:
-// add url and URLSearchParams
-
 const apiURL = new URL('http://api.publictransport.tampere.fi/prod/');
 
 app.post('/route', async (req, res): Promise<any> => {
     const startCoords: string = req.body.startCoords;
     const destCoords: string = req.body.coords;
 
+    // FIXME: change to use URLSearchParams
     let queryUrl = 'http://api.publictransport.tampere.fi/prod/?request=route&'
                     + process.env.API_KEY + '&'
                     + process.env.API_PASS + '&'
@@ -60,6 +58,8 @@ app.post('/get-address', async (req, res) => {
         const coords: string = req.body.coords;
 
         const params = new URLSearchParams({
+            user: process.env.API_KEY,
+            pass: process.env.API_PASS,
             request: 'reverse_geocode',
             coordinate: coords,
             limit: 1,
@@ -68,8 +68,6 @@ app.post('/get-address', async (req, res) => {
         });
 
         const url: string = `http://api.publictransport.tampere.fi/prod/?`
-                            + process.env.API_KEY + '&'
-                            + process.env.API_PASS + '&'
                             + params.toString();
 
         const response = await axios.get(url);

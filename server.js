@@ -31,12 +31,11 @@ app.get('/test', (req, res) => {
         "vastaus": "jeejee"
     });
 });
-// FIXME:
-// add url and URLSearchParams
 const apiURL = new URL('http://api.publictransport.tampere.fi/prod/');
 app.post('/route', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const startCoords = req.body.startCoords;
     const destCoords = req.body.coords;
+    // FIXME: change to use URLSearchParams
     let queryUrl = 'http://api.publictransport.tampere.fi/prod/?request=route&'
         + process.env.API_KEY + '&'
         + process.env.API_PASS + '&'
@@ -55,6 +54,8 @@ app.post('/get-address', (req, res) => __awaiter(this, void 0, void 0, function*
     try {
         const coords = req.body.coords;
         const params = new URLSearchParams({
+            user: process.env.API_KEY,
+            pass: process.env.API_PASS,
             request: 'reverse_geocode',
             coordinate: coords,
             limit: 1,
@@ -62,8 +63,6 @@ app.post('/get-address', (req, res) => __awaiter(this, void 0, void 0, function*
             format: 'json'
         });
         const url = `http://api.publictransport.tampere.fi/prod/?`
-            + process.env.API_KEY + '&'
-            + process.env.API_PASS + '&'
             + params.toString();
         const response = yield axios.get(url);
         res.send(response.data);
