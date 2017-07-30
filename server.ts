@@ -87,3 +87,31 @@ app.post('/get-address', async (req, res) => {
         // FIXME: handle sending errors to client differently?
     }
 });
+
+
+app.post('/get-coords', async (req, res) => {
+
+    const address: string = req.body.address;
+
+    try {
+        const params = new URLSearchParams({
+            user: process.env.API_KEY,
+            pass: process.env.API_PASS,
+            request: 'geocode',
+            format: 'json',
+            cities: 'tampere',
+            epsg_out: 'wgs84',
+            key: address
+        });
+
+        apiURL.search = params.toString();
+        const url = apiURL.toString();
+
+        const response = await axios.get(url);
+        res.send({ coords: response.data[0].coords });
+
+    } catch (e) {
+        console.log(e);
+        res.send({ error: `Could not find coordinates for ${address}` });
+    }
+});
