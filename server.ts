@@ -37,19 +37,27 @@ app.post('/route', async (req, res): Promise<any> => {
     const startCoords: string = req.body.startCoords;
     const destCoords: string = req.body.coords;
 
-    // FIXME: change to use URLSearchParams
-    let queryUrl = 'http://api.publictransport.tampere.fi/prod/?request=route&'
-                    + process.env.API_KEY + '&'
-                    + process.env.API_PASS + '&'
-                    + 'from=' + startCoords + '&'
-                    + 'to=' + destCoords + '&'
-                    + 'show=1&Detail=limited&epsg_in=wgs84';
+    const params = new URLSearchParams({
+        user: process.env.API_KEY,
+        pass: process.env.API_PASS,
+        request: 'route',
+        from: startCoords,
+        to: destCoords,
+        show: 1,
+        detail: 'limited',
+        epsg_in: 'wgs84'
+    });
+
+    apiURL.search = params.toString();
+    const url: string = apiURL.toString();
 
     try {
-        const response = await axios.get(queryUrl); // type of response?
+        const response = await axios.get(url); // type of response?
         res.send(response.data);
     } catch (e) {
         console.error(e);
+        res.send({ error: 'Could not find route' });
+        // FIXME: handle sending errors to client differently?
     }
 });
 
@@ -67,8 +75,8 @@ app.post('/get-address', async (req, res) => {
             format: 'json'
         });
 
-        const url: string = `http://api.publictransport.tampere.fi/prod/?`
-                            + params.toString();
+        apiURL.search = params.toString();
+        const url: string = apiURL.toString();
 
         const response = await axios.get(url);
         res.send(response.data);

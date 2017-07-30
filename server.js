@@ -35,19 +35,26 @@ const apiURL = new URL('http://api.publictransport.tampere.fi/prod/');
 app.post('/route', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const startCoords = req.body.startCoords;
     const destCoords = req.body.coords;
-    // FIXME: change to use URLSearchParams
-    let queryUrl = 'http://api.publictransport.tampere.fi/prod/?request=route&'
-        + process.env.API_KEY + '&'
-        + process.env.API_PASS + '&'
-        + 'from=' + startCoords + '&'
-        + 'to=' + destCoords + '&'
-        + 'show=1&Detail=limited&epsg_in=wgs84';
+    const params = new URLSearchParams({
+        user: process.env.API_KEY,
+        pass: process.env.API_PASS,
+        request: 'route',
+        from: startCoords,
+        to: destCoords,
+        show: 1,
+        detail: 'limited',
+        epsg_in: 'wgs84'
+    });
+    apiURL.search = params.toString();
+    const url = apiURL.toString();
     try {
-        const response = yield axios.get(queryUrl); // type of response?
+        const response = yield axios.get(url); // type of response?
         res.send(response.data);
     }
     catch (e) {
         console.error(e);
+        res.send({ error: 'Could not find route' });
+        // FIXME: handle sending errors to client differently?
     }
 }));
 app.post('/get-address', (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -62,8 +69,8 @@ app.post('/get-address', (req, res) => __awaiter(this, void 0, void 0, function*
             epsg_in: 'wgs84',
             format: 'json'
         });
-        const url = `http://api.publictransport.tampere.fi/prod/?`
-            + params.toString();
+        apiURL.search = params.toString();
+        const url = apiURL.toString();
         const response = yield axios.get(url);
         res.send(response.data);
     }
