@@ -4,20 +4,19 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createHistory from 'history/createBrowserHistory';
 import {
-    ConnectedRouter,
-    routerMiddleware,
+    ConnectedRouter
 } from 'react-router-redux';
+import thunk from 'redux-thunk';
 
 import Routes from './Routes';
 import AppReducer from './reducers';
 import './App.css';
 
 const history = createHistory();
-const middleware = routerMiddleware(history);
 const store = createStore(
     AppReducer,
     composeWithDevTools(
-        applyMiddleware(middleware)
+        applyMiddleware(thunk)
     )
 );
 
