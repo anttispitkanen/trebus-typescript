@@ -99,7 +99,7 @@ const tryFetch = async (latitude: string, longitude: string, coords: string, upd
     }
 
     try {
-        const res = await fetch('/get-address', opts);
+        const res = await fetch('/api/get-address', opts);
         let data;
 
         if (res.ok) {
