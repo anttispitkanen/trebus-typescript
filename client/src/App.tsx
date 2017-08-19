@@ -1,22 +1,34 @@
 import * as React from 'react';
-
-import './App.css';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createHistory from 'history/createBrowserHistory';
+import {
+    ConnectedRouter,
+    routerMiddleware,
+} from 'react-router-redux';
 
 import Routes from './Routes';
-// import NotFound from './components/NotFound';
+import AppReducer from './reducers';
+import './App.css';
 
-// this is the element that wraps with redux
+const history = createHistory();
+const middleware = routerMiddleware(history);
+const store = createStore(
+    AppReducer,
+    composeWithDevTools(
+        applyMiddleware(middleware)
+    )
+);
 
-class App extends React.Component<{}, null> {
-
-    render() {
-        return (
-            <div className="App">
-
+const App = () => (
+    <div className="App">
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
                 <Routes />
-            </div>
-        );
-    }
-}
+            </ConnectedRouter>
+        </Provider>
+    </div>
+);
 
 export default App;
