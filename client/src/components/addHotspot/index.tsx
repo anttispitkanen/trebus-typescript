@@ -9,4 +9,7 @@ export const mapDispatchToProps = (dispatch: any) => ({
     addHotspot: (newHotspot: HotspotType) => dispatch(addHotspot(newHotspot))
 });
 
-export default connect(null, mapDispatchToProps)(AddHotspot);
+export default connect(
+    null,
+    mapDispatchToProps
+)(AddHotspot);

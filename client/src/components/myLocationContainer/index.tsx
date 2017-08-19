@@ -1,4 +1,3 @@
-
 import { connect } from 'react-redux';
 
 import MyLocationContainer from './MyLocationContainer';
@@ -16,4 +15,6 @@ const mapDispatchToProps = (dispatch: any) => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyLocationContainer);
+export default connect(
+    mapStateToProps,mapDispatchToProps
+)(MyLocationContainer);

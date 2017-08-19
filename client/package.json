@@ -18,16 +18,17 @@
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "react-router-redux": "^5.0.0-alpha.6",
+    "react-router-redux": "^4.0.8",
     "redux": "^3.7.0",
-    "redux-devtools-extension": "^2.13.2"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "@types/enzyme": "^2.8.0",
-    "jest": "*",
     "enzyme": "^2.8.2",
+    "jest": "*",
     "react-addons-test-utils": "^15.6.0",
-    "react-scripts-ts": "2.2.0"
+    "react-scripts-ts": "2.2.0",
+    "redux-devtools-extension": "^2.13.2"
   },
   "scripts": {
     "start": "react-scripts-ts start",
