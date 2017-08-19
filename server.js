@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const { URL, URLSearchParams } = require('url');
 const app = express();
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/public'));
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
@@ -25,14 +25,14 @@ app.listen(app.get('port'), () => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // TESTING
-app.get('/test', (req, res) => {
+app.get('/api/test', (req, res) => {
     console.log('gotted :D');
     res.send({
         "vastaus": "jeejee"
     });
 });
 const apiURL = new URL('http://api.publictransport.tampere.fi/prod/');
-app.post('/route', (req, res) => __awaiter(this, void 0, void 0, function* () {
+app.post('/api/route', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const startCoords = req.body.startCoords;
     const destCoords = req.body.coords;
     const params = new URLSearchParams({
@@ -57,7 +57,7 @@ app.post('/route', (req, res) => __awaiter(this, void 0, void 0, function* () {
         // FIXME: handle sending errors to client differently?
     }
 }));
-app.post('/get-address', (req, res) => __awaiter(this, void 0, void 0, function* () {
+app.post('/api/get-address', (req, res) => __awaiter(this, void 0, void 0, function* () {
     try {
         const coords = req.body.coords;
         const params = new URLSearchParams({
@@ -80,7 +80,7 @@ app.post('/get-address', (req, res) => __awaiter(this, void 0, void 0, function*
         // FIXME: handle sending errors to client differently?
     }
 }));
-app.post('/get-coords', (req, res) => __awaiter(this, void 0, void 0, function* () {
+app.post('/api/get-coords', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const address = req.body.address;
     try {
         const params = new URLSearchParams({

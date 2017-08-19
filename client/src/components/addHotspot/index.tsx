@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import AddHotspot from '../components/AddHotspot';
+import AddHotspot from './AddHotspot';
 
-import { HotspotType } from '../types';
-import { addHotspot } from '../actions';
+import { HotspotType } from '../../types';
+import { addHotspot } from '../../actions';
 
 export const mapDispatchToProps = (dispatch: any) => ({
     addHotspot: (newHotspot: HotspotType) => dispatch(addHotspot(newHotspot))

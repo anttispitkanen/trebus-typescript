@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MyLocation } from '../types';
+import { MyLocation } from '../../types';
 
 interface Props {
     myLocation: MyLocation;
@@ -99,7 +99,7 @@ const tryFetch = async (latitude: string, longitude: string, coords: string, upd
     }
 
     try {
-        const res = await fetch('/get-address', opts);
+        const res = await fetch('/api/get-address', opts);
         let data;
 
         if (res.ok) {

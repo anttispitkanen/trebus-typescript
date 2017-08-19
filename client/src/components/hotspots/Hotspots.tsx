@@ -1,11 +1,9 @@
 import * as React from 'react';
 
-import Hotspot from '../containers/Hotspot';
-import AddHotspot from '../containers/AddHotspot';
+import Hotspot from '../hotspot';
+import AddHotspot from '../addHotspot';
 
-import { HotspotType } from '../types';
-
-// const hotspotArray = [1, null, undefined, Infinity, NaN];
+import { HotspotType } from '../../types';
 
 interface Props {
     myLocation: any; // FIX TYPE

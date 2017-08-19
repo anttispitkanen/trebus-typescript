@@ -7,7 +7,7 @@ const { URL, URLSearchParams } = require('url');
 
 const app = express();
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 8080));
 
 app.use(express.static(__dirname + '/public'));
 if (process.env.NODE_ENV === 'production') {
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 
 // TESTING
-app.get('/test', (req, res) => {
+app.get('/api/test', (req, res) => {
     console.log('gotted :D')
     res.send({
         "vastaus": "jeejee"
@@ -33,7 +33,7 @@ app.get('/test', (req, res) => {
 
 const apiURL = new URL('http://api.publictransport.tampere.fi/prod/');
 
-app.post('/route', async (req, res): Promise<any> => {
+app.post('/api/route', async (req, res): Promise<any> => {
     const startCoords: string = req.body.startCoords;
     const destCoords: string = req.body.coords;
 
@@ -61,7 +61,7 @@ app.post('/route', async (req, res): Promise<any> => {
     }
 });
 
-app.post('/get-address', async (req, res) => {
+app.post('/api/get-address', async (req, res) => {
     try {
         const coords: string = req.body.coords;
 
@@ -89,7 +89,7 @@ app.post('/get-address', async (req, res) => {
 });
 
 
-app.post('/get-coords', async (req, res) => {
+app.post('/api/get-coords', async (req, res) => {
 
     const address: string = req.body.address;
 

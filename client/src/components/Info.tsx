@@ -16,9 +16,9 @@ const Info = () => (
                 those hotspots from your current location.
             </p>
             <p>
-                If you want you can check out the source code on&nbsp; 
-                <a 
-                    href="https://github.com/anttispitkanen/trebus" 
+                If you want you can check out the source code on&nbsp;
+                <a
+                    href="https://github.com/anttispitkanen/trebus"
                     target="_blank"
                 >
                     GitHub

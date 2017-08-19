@@ -1,9 +1,9 @@
 
 import { connect } from 'react-redux';
 
-import MyLocationContainer from '../components/MyLocationContainer';
-import { MyLocation } from "../types/index";
-import { updateMyLocation } from '../actions';
+import MyLocationContainer from './MyLocationContainer';
+import { MyLocation } from "../../types";
+import { updateMyLocation } from '../../actions';
 
 // SHOULD THE STATE BE TYPED?
 const mapStateToProps = (state: any) => ({

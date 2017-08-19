@@ -4,9 +4,9 @@ import {
     deleteHotspot,
     moveHotspotUp,
     moveHotspotDown
-} from '../actions';
+} from '../../actions';
 
-import Hotspot from '../components/Hotspot';
+import Hotspot from './Hotspot';
 
 const mapStateToProps = (state: any, ownProps: any) => ({
     ...ownProps

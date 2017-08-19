@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import Header from './Header';
 import Footer from './Footer';
-import MyLocationContainer from '../containers/MyLocationContainer';
-import Hotspots from '../containers/Hotspots';
+import MyLocationContainer from './myLocationContainer';
+import Hotspots from './hotspots';
 
 // renders:
 // <Header />

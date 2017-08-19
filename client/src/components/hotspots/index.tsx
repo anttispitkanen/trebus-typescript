@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Hotspots from '../components/Hotspots';
+import Hotspots from './Hotspots';
 
 // FIX TYPE
 const mapStateToProps = (state: any) => ({
