@@ -2,18 +2,24 @@
 import { connect } from 'react-redux';
 
 import MyLocationContainer from '../components/MyLocationContainer';
-import { MyLocation } from "../types/index";
-import { updateMyLocation } from '../actions';
+import {
+    // getCoordinates,
+    // fetchAddress
+    locateMe
+} from '../actions/myLocationActions';
 
 // SHOULD THE STATE BE TYPED?
 const mapStateToProps = (state: any) => ({
-    myLocation: state.myLocation
-})
+    myLocation: state.myLocationReducer
+});
 
-const mapDispatchToProps = (dispatch: any) => ({
-    updateMyLocation: (newLocation: MyLocation) => {
-        dispatch(updateMyLocation(newLocation));
-    }
-})
+// const actions: any = {
+//     getCoordinates,
+//     fetchAddress
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyLocationContainer);
+export default connect(
+    mapStateToProps,
+    // actions
+    { locateMe }
+)(MyLocationContainer);

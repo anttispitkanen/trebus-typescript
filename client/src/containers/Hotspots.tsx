@@ -3,8 +3,8 @@ import Hotspots from '../components/Hotspots';
 
 // FIX TYPE
 const mapStateToProps = (state: any) => ({
-    myLocation: state.myLocation,
-    allHotspots: state.allHotspots
+    myLocation: state.myLocationReducer,
+    allHotspots: state.allHotspotsReducer
 });
 
 export default connect(mapStateToProps)(Hotspots);

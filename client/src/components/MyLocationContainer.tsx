@@ -4,6 +4,9 @@ import { MyLocation } from '../types';
 interface Props {
     myLocation: MyLocation;
     updateMyLocation: (m: MyLocation) => any;
+    getCoordinates: () => any;
+    fetchAddress: (coords: string | undefined) => any;
+    locateMe: () => any;
 }
 
 const WAITING_FOR_LOCATION: string = 'Waiting for location...';
@@ -11,7 +14,12 @@ const FETCHING_ADDRESS: string = 'Fetching address...';
 const LOCATING: string = 'Locating...';
 
 
-export const MyLocationContainer = ({ myLocation, updateMyLocation }: Props) => (
+export const MyLocationContainer = ({
+    myLocation,
+    // getCoordinates,
+    // fetchAddress
+    locateMe
+}: Props) => (
     <div className="my-location">
 
         <i className="location-marker fa fa-map-marker" aria-hidden="true"></i>
@@ -25,9 +33,7 @@ export const MyLocationContainer = ({ myLocation, updateMyLocation }: Props) => 
         <button
             className="button"
             title="locate me"
-            onClick={() => {
-                locateMe(updateMyLocation);
-            }}
+            onClick={locateMe}
         >
             Locate me
         </button>
@@ -36,7 +42,7 @@ export const MyLocationContainer = ({ myLocation, updateMyLocation }: Props) => 
 
 
 // FIXME any type
-const renderAddress = (myLocation: any) => {
+const renderAddress = (myLocation: MyLocation) => {
     if (!myLocation.address) {
         return (<span style={{color: 'rgb(225, 1, 70)'}}>{WAITING_FOR_LOCATION}</span>);
     }
@@ -53,87 +59,87 @@ const renderAddress = (myLocation: any) => {
 }
 
 
-const locateMe = (updateMyLocation: any) => { // FIXME type
-    // RESET VALUES
-    updateMyLocation({
-        latitude: undefined,
-        longitude: undefined,
-        coords: undefined,
-        address: LOCATING
-    })
+// const locateMe = (updateMyLocation: any) => { // FIXME type
+//     // RESET VALUES
+//     updateMyLocation({
+//         latitude: undefined,
+//         longitude: undefined,
+//         coords: undefined,
+//         address: LOCATING
+//     })
 
-    navigator.geolocation.getCurrentPosition(pos => {
-        if(!pos) {
-            throw new Error('cannot locate');
-        }
+//     navigator.geolocation.getCurrentPosition(pos => {
+//         if(!pos) {
+//             throw new Error('cannot locate');
+//         }
 
-        const latitude: string = pos.coords.latitude.toString();
-        const longitude: string = pos.coords.longitude.toString();
-        const coords: string = longitude + ',' + latitude;
+//         const latitude: string = pos.coords.latitude.toString();
+//         const longitude: string = pos.coords.longitude.toString();
+//         const coords: string = longitude + ',' + latitude;
 
-        updateMyLocation({
-            latitude,
-            longitude,
-            coords,
-            address: FETCHING_ADDRESS
-        })
+//         updateMyLocation({
+//             latitude,
+//             longitude,
+//             coords,
+//             address: FETCHING_ADDRESS
+//         })
 
-        tryFetch(latitude, longitude, coords, updateMyLocation);
+//         tryFetch(latitude, longitude, coords, updateMyLocation);
 
-    }, failure => {
-        console.error(failure.message);
-    })
-};
+//     }, failure => {
+//         console.error(failure.message);
+//     })
+// };
 
 
 // FIXME any type
-const tryFetch = async (latitude: string, longitude: string, coords: string, updateMyLocation: any) => {
-    const opts: object = {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            coords
-        })
-    }
+// const tryFetch = async (latitude: string, longitude: string, coords: string, updateMyLocation: any) => {
+//     const opts: object = {
+//         method: 'post',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             coords
+//         })
+//     }
 
-    try {
-        const res = await fetch('/api/get-address', opts);
-        let data;
+//     try {
+//         const res = await fetch('/api/get-address', opts);
+//         let data;
 
-        if (res.ok) {
-            data = await res.json();
-        } else {
-            throw new Error('res not ok :/');
-        }
+//         if (res.ok) {
+//             data = await res.json();
+//         } else {
+//             throw new Error('res not ok :/');
+//         }
 
-        const info = data[0];
-        // console.log(info);
+//         const info = data[0];
+//         // console.log(info);
 
-        if (!info.city || info.city !== 'Tampere') {
-            alert('Ekkönää oo Tampesterissa? :D');
-        } else {
-            let address = info.name;
-            if (info.details && info.details.houseNumber) {
-                address += ' ' + info.details.houseNumber;
-            }
+//         if (!info.city || info.city !== 'Tampere') {
+//             alert('Ekkönää oo Tampesterissa? :D');
+//         } else {
+//             let address = info.name;
+//             if (info.details && info.details.houseNumber) {
+//                 address += ' ' + info.details.houseNumber;
+//             }
 
-            const updatedLocation: MyLocation = {
-                latitude,
-                longitude,
-                coords,
-                address
-            }
-            // console.log(updatedLocation);
+//             const updatedLocation: MyLocation = {
+//                 latitude,
+//                 longitude,
+//                 coords,
+//                 address
+//             }
+//             // console.log(updatedLocation);
 
-            updateMyLocation(updatedLocation);
-        }
+//             updateMyLocation(updatedLocation);
+//         }
 
-    } catch (e) {
-        console.error(e);
-    }
-}
+//     } catch (e) {
+//         console.error(e);
+//     }
+// }
 
 
 export default MyLocationContainer;

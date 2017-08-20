@@ -1,6 +1,6 @@
-import { allHotspots, myLocation } from './index';
-import { HotspotType, MyLocation } from '../types';
-import { addHotspot, deleteHotspot, updateMyLocation} from '../actions';
+import { allHotspotsReducer } from './allHotspotsReducer';
+import { HotspotType } from '../types';
+import { addHotspot, deleteHotspot } from '../actions';
 
 const testHotspot: HotspotType = {
     name: 'testinimi',
@@ -34,12 +34,12 @@ const testHotspotArray: HotspotType[] = [
 describe('allHotspots', () => {
     describe('adding hotspots', () => {
         it('adds correctly', () => {
-            expect(allHotspots(undefined, addHotspot(testHotspot)))
+            expect(allHotspotsReducer([], addHotspot(testHotspot)))
             .toEqual([ testHotspot ]);
         });
 
         it('adds correctly when there are already some hotspots', () => {
-            expect(allHotspots(testHotspotArray, addHotspot(testHotspot)))
+            expect(allHotspotsReducer(testHotspotArray, addHotspot(testHotspot)))
             .toEqual([
                 origHotspotOne,
                 origHotspotTwo,
@@ -50,7 +50,7 @@ describe('allHotspots', () => {
 
     describe('deleting', () => {
         it('does nothing when deleting from empty array', () => {
-            expect(allHotspots(undefined, deleteHotspot(0)))
+            expect(allHotspotsReducer([], deleteHotspot(0)))
             .toEqual([]);
         });
 
@@ -60,7 +60,7 @@ describe('allHotspots', () => {
                 origHotspotTwo
             ];
 
-            expect(allHotspots(testHotspotArray, deleteHotspot(999)))
+            expect(allHotspotsReducer(testHotspotArray, deleteHotspot(999)))
             .toEqual([
                 origHotspotOne,
                 origHotspotTwo
@@ -73,7 +73,7 @@ describe('allHotspots', () => {
                 origHotspotTwo
             ];
 
-            expect(allHotspots(testHotspotArray, deleteHotspot(-1)))
+            expect(allHotspotsReducer(testHotspotArray, deleteHotspot(-1)))
             .toEqual([
                 origHotspotOne,
                 origHotspotTwo
@@ -86,7 +86,7 @@ describe('allHotspots', () => {
                 origHotspotTwo
             ];
 
-            expect(allHotspots(testHotspotArray, deleteHotspot(0)))
+            expect(allHotspotsReducer(testHotspotArray, deleteHotspot(0)))
             .toEqual([
                 origHotspotTwo
             ]);
@@ -99,7 +99,7 @@ describe('allHotspots', () => {
                 testHotspot
             ];
 
-            expect(allHotspots(testHotspotArray, deleteHotspot(1)))
+            expect(allHotspotsReducer(testHotspotArray, deleteHotspot(1)))
             .toEqual([
                 origHotspotOne,
                 testHotspot
@@ -113,37 +113,11 @@ describe('allHotspots', () => {
                 testHotspot
             ];
 
-            expect(allHotspots(testHotspotArray, deleteHotspot(2)))
+            expect(allHotspotsReducer(testHotspotArray, deleteHotspot(2)))
             .toEqual([
                 origHotspotOne,
                 origHotspotTwo
             ]);
         });
-    });
-});
-
-const testLocation: MyLocation = {
-    latitude: 'test lat',
-    longitude: 'test long',
-    coords: 'test long,lat',
-    address: 'test address'
-};
-
-const testLocation2: MyLocation = {
-    latitude: 'test lat 2',
-    longitude: 'test long 2',
-    coords: 'test long,lat 2',
-    address: 'test address 2'
-};
-
-describe('myLocation', () => {
-    it('updates location with empty initial state', () => {
-        expect(myLocation(undefined, updateMyLocation(testLocation)))
-        .toEqual(testLocation);
-    });
-
-    it('updates location when there is an old location already', () => {
-        expect(myLocation(testLocation, updateMyLocation(testLocation2)))
-        .toEqual(testLocation2);
     });
 });

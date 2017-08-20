@@ -56,6 +56,7 @@ app.post('/api/route', async (req, res): Promise<any> => {
         res.send(response.data);
     } catch (e) {
         console.error(e);
+        res.status(404);
         res.send({ error: 'Could not find route' });
         // FIXME: handle sending errors to client differently?
     }
@@ -83,6 +84,7 @@ app.post('/api/get-address', async (req, res) => {
 
     } catch (e) {
         console.error(e);
+        res.status(404);
         res.send({ error: 'Could not find address' });
         // FIXME: handle sending errors to client differently?
     }
@@ -112,6 +114,7 @@ app.post('/api/get-coords', async (req, res) => {
 
     } catch (e) {
         console.log(e);
+        res.status(404);
         res.send({ error: `Could not find coordinates for ${address}` });
     }
 });

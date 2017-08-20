@@ -1,5 +1,5 @@
 import * as constants from '../constants';
-import { HotspotType, MyLocation } from '../types';
+import { HotspotType } from '../types';
 
 /**
  * Adding hotspots
@@ -61,18 +61,3 @@ export type HotspotAction = AddHotspot
                             | DeleteHotspot
                             | MoveHotspotUp
                             | MoveHotspotDown;
-
-/**
- * Updating my location
- */
-export interface UpdateMyLocation {
-    type: constants.UPDATE_MY_LOCATION;
-    newLocation: MyLocation;
-}
-
-export type MyLocationAction = UpdateMyLocation;
-
-export const updateMyLocation = (newLocation: MyLocation): UpdateMyLocation => ({
-    type: constants.UPDATE_MY_LOCATION,
-    newLocation
-});
