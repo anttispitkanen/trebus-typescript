@@ -2,14 +2,9 @@ import * as React from 'react';
 
 import Header from './Header';
 import Footer from './Footer';
-import MyLocationContainer from '../containers/MyLocationContainer';
+import MyLocationContainer from './myLocationContainer';
 import Hotspots from '../containers/Hotspots';
 
-// renders:
-// <Header />
-// <MyLocation />
-// <Hotspots />
-// <Footer />
 const Home = () => (
     <div>
         <Header />
@@ -20,9 +15,3 @@ const Home = () => (
 );
 
 export default Home;
-
-/*const Hotspots = () => (
-    <div>
-        <h2>Hotspots</h2>
-    </div>
-);*/

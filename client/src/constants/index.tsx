@@ -16,6 +16,9 @@ export type MOVE_HOTSPOT_DOWN = typeof MOVE_HOTSPOT_DOWN;
 /**
  * MyLocation
  */
+export const NO_LOCATION = 'NO_LOCATION';
+export type NO_LOCATION = typeof NO_LOCATION;
+
 export const FETCHING_COORDS = 'FETCHING_COORDS';
 export type FETCHING_COORDS = typeof FETCHING_COORDS;
 
